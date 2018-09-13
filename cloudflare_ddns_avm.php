@@ -23,7 +23,7 @@ Username : anything as this does nothing yet
 Password : Your private key, eg. "key1" - make sure to not use any special characters
 **/
 // Check the calling client has a valid auth key.
-if (empty($_POST['auth']) && empty($_GET["auth"]) && empty($_SERVER[PHP_AUTH_PW]) && empty($_SERVER[PHP_AUTH_USER]) ) {
+if (empty($_POST['auth']) && empty($_GET["auth"]) && empty($_SERVER["PHP_AUTH_PW"]) && empty($_SERVER["PHP_AUTH_USER"]) ) {
         die("Authentication required\n");
 }
 
@@ -32,12 +32,12 @@ if (!empty($_POST["auth"]))
 if (!empty($_GET["auth"]))
         $auth=$_GET["auth"];
 	
-if (!empty($_SERVER[PHP_AUTH_PW]))
-        $auth=$_SERVER[PHP_AUTH_PW];
+if (!empty($_SERVER["PHP_AUTH_PW"]))
+        $auth=$_SERVER["PHP_AUTH_PW"];
 
 	/** This does nothing yet
-if (!empty($_SERVER[PHP_AUTH_USER]))
-        $host=$_SERVER[PHP_AUTH_USER];	
+if (!empty($_SERVER["PHP_AUTH_USER"]))
+        $host=$_SERVER["PHP_AUTH_USER"];	
 	**/
 if (!array_key_exists($auth, $hosts)) {
         die("Invalid auth key\n");
@@ -139,6 +139,7 @@ function print_err_msg() {
 
 function do_some_stuff ($ip, $ddnsAddress)
 {
+	global $data, $baseUrl, $url, $fields, $headers, $myDomain;
 	// Determine protocol version and set record type.
 	if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 			$type = 'AAAA';
