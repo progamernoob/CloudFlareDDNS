@@ -23,7 +23,7 @@ Username : anything as this does nothing yet
 Password : Your private key, eg. "key1" - make sure to not use any special characters
 **/
 // Check the calling client has a valid auth key.
-if (empty($_POST['auth']) && empty($_GET["auth"]) || empty($_SERVER[PHP_AUTH_PW]) && empty($_SERVER[PHP_AUTH_USER]) ) {
+if (empty($_POST['auth']) && empty($_GET["auth"]) && empty($_SERVER[PHP_AUTH_PW]) && empty($_SERVER[PHP_AUTH_USER]) ) {
         die("Authentication required\n");
 }
 
