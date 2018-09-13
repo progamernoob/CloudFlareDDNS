@@ -140,6 +140,7 @@ function print_err_msg() {
 function do_some_stuff ($ip, $ddnsAddress)
 {
 	global $data, $baseUrl, $url, $fields, $headers, $myDomain;
+	unset ($data, $zoneID);
 	// Determine protocol version and set record type.
 	if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 			$type = 'AAAA';
@@ -147,10 +148,12 @@ function do_some_stuff ($ip, $ddnsAddress)
 			$type = 'A';
 	}
 	//Update $baseUrl
+	$baseUrl      = 'https://api.cloudflare.com/client/v4/';
 	$baseUrl .= 'zones';
 	// Build the request to fetch the zone ID.
 	// https://api.cloudflare.com/#zone-list-zones
 	$url = $baseUrl.'?name='.$myDomain;
+	
 	$data = send_request("GET");
 	// Continue if the request succeeded.
 	if ($data->success) {
